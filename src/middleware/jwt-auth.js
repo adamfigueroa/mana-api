@@ -14,7 +14,7 @@ async function requireAuth(req, res, next) {
   try {
     const payload = AuthService.verifyJwt(bearerToken);
 
-    const user = await AuthService.getUserWithUserName(
+    const user = await AuthService.fetchUserName(
       req.app.get('db'),
       payload.sub
     );
