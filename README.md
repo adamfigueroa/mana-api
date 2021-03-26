@@ -1,26 +1,80 @@
-# Express Boilerplate!
+# Mana Server | Node.js/Express
 
-This is a boilerplate project used for starting new projects!
+Link to front end client: https://mana-client.vercel.app/
 
-## Set up
+## About the Mana Server
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+This server is built using Node.js/Express with the purpose of being the API/backend for my app "Mana" which allows Users to create and track a daily routine (or practice as I like to call it).
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+## Documentation
 
-## Scripts
+### Endpoints
 
-Start the application `npm start`
+#### Login Endpoint
 
-Start nodemon for the application `npm run dev`
+`POST /api/login`
 
-Run the tests `npm test`
+| Body Key     | Type     | Description                         |
+| :----------- | :------- | :---------------------------------- |
+| `user_name`  | `string` |      user_name is required          |
+| `password`   | `string` |      password is required          |
 
-## Deploying
+#### Register User Endpoint
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's main branch.
+`POST /api/user`
+
+| Body Key     | Type     | Description                         |
+| :----------- | :------- | :---------------------------------- |
+| `first_name` | `string` |      first_name is required         |
+| `last_name`  | `string` |      last_name is required          |
+| `user_name`  | `string` |      user_name is required          |
+| `password`   | `string` |      password is required           |
+
+#### Practice Endpoints
+
+- Get user Practice
+`GET /api/practice`
+
+- Get Practice details
+`GET /api/practice/:practiceId`
+
+- Delete Practice
+`DELETE /api/practice/:practiceId`
+
+### Edit Practice Route
+`PATCH /api/practice/:practiceId`
+
+| Body Key            | Type      | Description                        |
+| :------------------ | :-------  | :--------------------------------- |
+|   `practice_name`   |  `string` |  Name of the practice (Required)      |
+|   `days_to_track`   |  `string` |  how many days does the user want to track (Required) |
+|     `days_left`     |  `string` |  how many days are left to track (Required, initial value must be the same as "days_to_track")|
+|     `date_start`    |  `string` |  this is a timestamp that is created server side when practice is created    |
+|   `dates_complete`  |  `string` |  these are the dates marked as complete (practice complete when "days_left" - "dates_complete.length" = 0 )   |
+|  `dates_incomplete` |  `string` |  these are the dates marked as incomplete    |
+|      `user_id`      | `integer` |  user_id is (Required)     |
+
+### Status Codes
+
+This API returns the following status codes:
+
+| Status Code | Description             |
+| :---------- | :---------------------- |
+| 200         | `OK`                    |
+| 201         | `CREATED`               |
+| 400         | `BAD REQUEST`           |
+| 404         | `NOT FOUND`             |
+| 500         | `INTERNAL SERVER ERROR` |
+
+### Technology Used
+
+- Node.js
+- Express
+- PostgreSQL
+- Testing with Mocha and Chai
+
+#### To install locally
+
+- Clone the github repo to your machine.
+- Run 'npm install' in git
+- Run 'npm start'
