@@ -48,7 +48,6 @@ This server is built using Node.js/Express with the purpose of being the API/bac
 | :------------------ | :-------  | :--------------------------------- |
 |   `practice_name`   |  `string` |  Name of the practice (Required)      |
 |   `days_to_track`   |  `string` |  how many days does the user want to track (Required) |
-|     `days_left`     |  `string` |  how many days are left to track (Required, initial value must be the same as "days_to_track")|
 |     `date_start`    |  `string` |  this is a timestamp that is created server side when practice is created    |
 |   `dates_complete`  |  `string` |  these are the dates marked as complete (practice complete when "days_left" - "dates_complete.length" = 0 )   |
 |  `dates_incomplete` |  `string` |  these are the dates marked as incomplete    |
