@@ -11,7 +11,6 @@ const serializePractice = (practice) => ({
   id: practice.id,
   practice_name: xss(practice.practice_name),
   days_to_track: practice.days_to_track,
-  days_left: practice.days_left,
   date_start: practice.date_start,
   dates_complete: practice.dates_complete,
   dates_incomplete: practice.dates_incomplete,
@@ -53,7 +52,6 @@ practiceRouter
     const {
       practice_name,
       days_to_track,
-      days_left,
       date_start,
       dates_complete,
       dates_incomplete,
@@ -63,7 +61,6 @@ practiceRouter
     const newPractice = {
       practice_name,
       days_to_track,
-      days_left,
       date_start,
       dates_complete,
       dates_incomplete,
@@ -109,7 +106,6 @@ practiceRouter
     let {
       practice_name,
       days_to_track,
-      days_left,
       date_start,
       dates_complete,
       dates_incomplete,
@@ -146,7 +142,6 @@ practiceRouter
     const editPractice = {
       practice_name,
       days_to_track,
-      days_left,
       date_start,
       dates_complete,
       dates_incomplete,
