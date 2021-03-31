@@ -1,5 +1,6 @@
 CREATE TABLE sessions (
     id SERIAL PRIMARY KEY,
     date TIMESTAMPTZ NOT NULL DEFAULT now(),
+    user_id INTEGER
     REFERENCES user_practice(id) ON DELETE CASCADE NOT NULL
 );
