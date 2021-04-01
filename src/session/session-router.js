@@ -16,7 +16,7 @@ async function validateSession(req, res, next) {
   try {
     const session = await SessionService.getById(
       req.app.get('db'),
-      req.params.practice_id
+      req.params.session_id
     );
 
     if (!session) {
@@ -35,7 +35,7 @@ sessionRouter
   .route('/')
   .all(requireAuth)
   .get((req, res, next) => {
-    SessionService.getUserSessions(req.app.get('db'), req.practice.id)
+    SessionService.getUserSessions(req.app.get('db'), req.query.practice_id)
       .then((sessions) => {
         return res.json(sessions.map(serializeSession));
       })
@@ -43,10 +43,10 @@ sessionRouter
   })
 
   .post(jsonParser, (req, res, next) => {
-    const { date, user_id } = req.body;
+    const { date, practice_id } = req.body;
     const newSession = {
       date,
-      user_id: req.user.id,
+      practice_id,
     };
 
     for (const [key, value] of Object.entries(newSession)) {
@@ -84,22 +84,22 @@ sessionRouter
       .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    let { date, user_id } = req.body;
+    let { date, practice_id } = req.body;
 
     if (!date) {
       return res.status(400).json({
         error: 'Please submit completed date',
       });
     }
-    if (!user_id) {
+    if (!practice_id) {
       return res.status(400).json({
-        error: 'Please submit user_id',
+        error: 'Please submit practice_id',
       });
     }
 
     const editedSession = {
       date,
-      user_id,
+      practice_id,
     };
 
     SessionService.editSession(req.app.get('db'), editedSession, req.session.id)
@@ -111,3 +111,5 @@ sessionRouter
       })
       .catch(next);
   });
+
+module.exports = sessionRouter;
