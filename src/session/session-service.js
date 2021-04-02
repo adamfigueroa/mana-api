@@ -3,7 +3,7 @@ const SessionService = {
       return db
         .select('*')
         .from('sessions')
-        .where({ id: submitted_id });
+        .where({ user_id: submitted_id });
     },
   
     getById(db, id) {

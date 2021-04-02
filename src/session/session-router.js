@@ -35,7 +35,7 @@ sessionRouter
   .route('/')
   .all(requireAuth)
   .get((req, res, next) => {
-    SessionService.getUserSessions(req.app.get('db'), req.query.practice_id)
+    SessionService.getUserSessions(req.app.get('db'), req.user.id)
       .then((sessions) => {
         return res.json(sessions.map(serializeSession));
       })
