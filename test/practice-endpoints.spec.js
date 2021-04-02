@@ -41,7 +41,6 @@ describe('Practice Endpoints', function () {
             id: 1,
             practice_name: 'practice-1',
             days_to_track: 15,
-            days_left: 15,
             date_start: '2021-02-05T16:28:32.615Z',
             dates_complete: [],
             dates_incomplete: [],
@@ -60,7 +59,6 @@ describe('Practice Endpoints', function () {
             id: 6,
             practice_name: 'practice-6',
             days_to_track: 17,
-            days_left: 17,
             date_start: '2021-02-05T16:28:32.615Z',
             dates_complete: [],
             dates_incomplete: [],
@@ -86,7 +84,6 @@ describe('Practice Endpoints', function () {
       const badPractice = {
         practice_name: null,
         days_to_track: 5,
-        days_left: 5,
         date_start: testPractice[0].date_start,
         day_of_week: ['Sunday', 'Thursday', 'Friday'],
         user_id: 1,
@@ -104,7 +101,6 @@ describe('Practice Endpoints', function () {
       const goodPractice = {
         practice_name: 'test practice',
         days_to_track: 5,
-        days_left: 5,
         date_start: testPractice[0].date_start,
         day_of_week: ['Sunday', 'Thursday', 'Friday'],
         user_id: 1,
@@ -119,7 +115,6 @@ describe('Practice Endpoints', function () {
           expect(res.body).to.have.property('id');
           expect(res.body.practice_name).to.eql(goodPractice.practice_name);
           expect(res.body.days_to_track).to.eql(goodPractice.days_to_track);
-          expect(res.body.days_left).to.eql(goodPractice.days_left);
           expect(res.body.date_start).to.eql(goodPractice.date_start);
           expect(res.body.day_of_week).to.eql(goodPractice.day_of_week);
           expect(res.headers.location).to.equal(`/api/practice/${res.body.id}`);
