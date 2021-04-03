@@ -43,10 +43,11 @@ sessionRouter
   })
 
   .post(jsonParser, (req, res, next) => {
-    const { date, practice_id } = req.body;
+    const { date, practice_id, user_id } = req.body;
     const newSession = {
       date,
       practice_id,
+      user_id
     };
 
     for (const [key, value] of Object.entries(newSession)) {
