@@ -140,7 +140,7 @@ describe('User Endpoints', function () {
         return supertest(app)
           .post('/api/user')
           .send(usernameTaken)
-          .expect(400, { error: 'Username already taken' });
+          .expect(400, { error: 'Email already registered' });
       });
     });
 
