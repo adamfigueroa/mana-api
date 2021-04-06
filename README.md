@@ -1,6 +1,7 @@
 # Mana Server | Node.js/Express
 
-Link to front end client: https://mana-client.vercel.app/
+- Link to front end client: https://mana-client.vercel.app/
+- Link to client Repo: https://github.com/adamfigueroa/mana-client
 
 ## About the Mana Server
 
