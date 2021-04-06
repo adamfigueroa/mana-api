@@ -25,7 +25,7 @@ userRouter.post('/', jsonBodyParser, async (req, res, next) => {
     );
 
     if (hasUserWithUsername)
-      return res.status(400).json({ error: `Username already taken` });
+      return res.status(400).json({ error: `Email already registered` });
 
     const hashedPassword = await UserService.hashPassword(password);
 
