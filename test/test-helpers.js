@@ -53,8 +53,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-1',
       days_to_track: 15,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week:
         '{Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday}',
       user_id: 1,
@@ -64,8 +62,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-2',
       days_to_track: 27,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Sunday, Monday, Tuesday, Wednesday, Thursday}',
       user_id: 2,
     },
@@ -74,8 +70,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-3',
       days_to_track: 30,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Monday, Wednesday, Friday}',
       user_id: 3,
     },
@@ -84,8 +78,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-4',
       days_to_track: 90,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week:
         '{Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday}',
       user_id: 3,
@@ -95,8 +87,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-5',
       days_to_track: 7,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Saturday}',
       user_id: 5,
     },
@@ -105,8 +95,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-6',
       days_to_track: 17,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Sunday, Thursday, Friday}',
       user_id: 1,
     },
@@ -115,8 +103,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-7',
       days_to_track: 32,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Sunday, Saturday}',
       user_id: 2,
     },
@@ -125,8 +111,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-8',
       days_to_track: 5,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Monday, Tuesday, Wednesday, Thursday, Friday}',
       user_id: 3,
     },
@@ -135,8 +119,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-9',
       days_to_track: 7,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week:
         '{Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday}',
       user_id: 2,
@@ -146,8 +128,6 @@ function makeTestPracticeArray() {
       practice_name: 'practice-10',
       days_to_track: 3,
       date_start: '2021-02-05T16:28:32.615Z',
-      dates_complete: {},
-      dates_incomplete: {},
       day_of_week: '{Sunday, Tuesday, Thursday}',
       user_id: 5,
     },
@@ -160,66 +140,79 @@ function makeTestSessionArray() {
       id: 1,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 1,
+      user_id: 1,
     },
     {
       id: 2,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 2,
+      user_id: 1,
     },
     {
       id: 3,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 2,
+      user_id: 2,
     },
     {
       id: 4,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 3,
+      user_id: 3,
     },
     {
       id: 5,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 4,
+      user_id: 3,
     },
     {
       id: 6,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 4,
+      user_id: 3,
     },
     {
       id: 7,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 4,
+      user_id: 3,
     },
     {
       id: 8,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 5,
+      user_id: 5,
     },
     {
       id: 9,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 6,
+      user_id: 1,
     },
     {
       id: 10,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 7,
+      user_id: 2,
     },
     {
       id: 11,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 8,
+      user_id: 3,
     },
     {
       id: 12,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 9,
+      user_id: 2,
     },
     {
       id: 13,
       date: '2021-02-05T16:28:32.615Z',
       practice_id: 10,
+      user_id: 5,
     },
   ];
 }
@@ -265,16 +258,13 @@ function seedTestPracticeTables(db, users, practice) {
     });
 }
 function seedTestSessionTables(db, users, practice, session) {
-  return seedTestUsers(db, users)
-  .then(() => {
-    return seedTestPracticeTables(db, users, practice)
-  })
+  return seedTestPracticeTables(db, users, practice)
     .then(() => {
       return db.into('sessions').insert(session);
     })
     .then(() => {
       return db.raw(
-        `SELECT setval('user_session_id_seq', ?)`,
+        `SELECT setval('sessions_id_seq', ?)`,
         session[session.length - 1].id
       );
     });

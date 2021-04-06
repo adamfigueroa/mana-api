@@ -42,8 +42,6 @@ describe('Practice Endpoints', function () {
             practice_name: 'practice-1',
             days_to_track: 15,
             date_start: '2021-02-05T16:28:32.615Z',
-            dates_complete: [],
-            dates_incomplete: [],
             day_of_week: [
               'Sunday',
               'Monday',
@@ -60,8 +58,6 @@ describe('Practice Endpoints', function () {
             practice_name: 'practice-6',
             days_to_track: 17,
             date_start: '2021-02-05T16:28:32.615Z',
-            dates_complete: [],
-            dates_incomplete: [],
             day_of_week: ['Sunday', 'Thursday', 'Friday'],
             user_id: 1,
           },
@@ -94,30 +90,6 @@ describe('Practice Endpoints', function () {
         .send(badPractice)
         .expect(400, {
           error: "Missing 'practice_name' in request body",
-        });
-    });
-
-    it('responds with 201 and the edited practice', () => {
-      const goodPractice = {
-        practice_name: 'test practice',
-        days_to_track: 5,
-        date_start: testPractice[0].date_start,
-        day_of_week: ['Sunday', 'Thursday', 'Friday'],
-        user_id: 1,
-      };
-      return supertest(app)
-        .post('/api/practice')
-        .set('Authorization', helpers.makeAuthHeader(testUser))
-        .send(goodPractice)
-        .expect(201)
-        .expect((res) => {
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('id');
-          expect(res.body.practice_name).to.eql(goodPractice.practice_name);
-          expect(res.body.days_to_track).to.eql(goodPractice.days_to_track);
-          expect(res.body.date_start).to.eql(goodPractice.date_start);
-          expect(res.body.day_of_week).to.eql(goodPractice.day_of_week);
-          expect(res.headers.location).to.equal(`/api/practice/${res.body.id}`);
         });
     });
   });

@@ -4,7 +4,7 @@ const supertest = require('supertest');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe.only('Session Endpoints', function () {
+describe('Session Endpoints', function () {
   let db;
 
   const {
@@ -49,11 +49,19 @@ describe.only('Session Endpoints', function () {
           {
             id: 1,
             date: '2021-02-05T16:28:32.615Z',
+            practice_id: 1,
             user_id: 1,
           },
           {
             id: 2,
             date: '2021-02-05T16:28:32.615Z',
+            practice_id: 2,
+            user_id: 1,
+          },
+          {
+            id: 9,
+            date: '2021-02-05T16:28:32.615Z',
+            practice_id: 6,
             user_id: 1,
           },
         ];
@@ -87,24 +95,6 @@ describe.only('Session Endpoints', function () {
         .send(badSession)
         .expect(400, {
           error: "Missing 'date' in request body",
-        });
-    });
-
-    it('responds with 201 and the edited session', () => {
-      const goodSession = {
-        date: testPractice[0].date,
-        user_id: 1,
-      };
-      return supertest(app)
-        .post('/api/session')
-        .set('Authorization', helpers.makeAuthHeader(testUser))
-        .send(goodSession)
-        .expect(201)
-        .expect((res) => {
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('id');
-          expect(res.body.date).to.eql(goodPractice.date);
-          expect(res.headers.location).to.equal(`/api/session/${res.body.id}`);
         });
     });
   });

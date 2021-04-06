@@ -35,23 +35,10 @@ This server is built using Node.js/Express with the purpose of being the API/bac
 - Get user Practice
 `GET /api/practice`
 
-- Get Practice details
-`GET /api/practice/:practiceId`
+#### Session Endpoints
 
-- Delete Practice
-`DELETE /api/practice/:practiceId`
-
-### Edit Practice Route
-`PATCH /api/practice/:practiceId`
-
-| Body Key            | Type      | Description                        |
-| :------------------ | :-------  | :--------------------------------- |
-|   `practice_name`   |  `string` |  Name of the practice (Required)      |
-|   `days_to_track`   |  `string` |  how many days does the user want to track (Required) |
-|     `date_start`    |  `string` |  this is a timestamp that is created server side when practice is created    |
-|   `dates_complete`  |  `string` |  these are the dates marked as complete (practice complete when "days_left" - "dates_complete.length" = 0 )   |
-|  `dates_incomplete` |  `string` |  these are the dates marked as incomplete    |
-|      `user_id`      | `integer` |  user_id is (Required)     |
+- Get user Session
+`GET /api/session`
 
 ### Status Codes
 

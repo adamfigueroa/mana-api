@@ -10,6 +10,7 @@ const serializeSession = (session) => ({
   id: session.id,
   date: session.date,
   practice_id: session.practice_id,
+  user_id: session.user_id,
 });
 
 async function validateSession(req, res, next) {
